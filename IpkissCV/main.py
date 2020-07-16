@@ -1,37 +1,47 @@
 # python main.py --ip 0.0.0.0 --port 8000
-
+from flask_pymongo import pymongo
 from models.ipkiss import Ipkiss
 from imutils.video import VideoStream
-from flask import Response
-from flask import Flask
-from flask import render_template
+from flask import Response, render_template, Flask
+#from flask import Flask
+#from flask import render_template
 import threading
 import argparse
-#from datetime import datetime
+import dao
 import imutils
 import time
 import cv2
+#import base64
 
+CONNECTION_STRING = "mongodb+srv://admin:123@ipkiss.bcenh.gcp.mongodb.net/data?retryWrites=true&w=majority"
 #a saída e uma trava usada para garantir a segurança de threads
 # trocas dos quadros na saída
+
+client = pymongo.MongoClient(CONNECTION_STRING)
+db = client.get_database('cv')
+fotos = pymongo.collection.Collection(db,'fotos')
+teste = False
+
 saida = None
 
 trava = threading.Lock()
 app = Flask(__name__)
 
 #Aqui Video Stream
-vs = VideoStream(src=0).start()
+vs = VideoStream(src='http://192.168.0.117:8080/video').start()
 time.sleep(2.0)
 
 @app.route("/")
 def index():
     # retona a view renderizada
+    #datahora = datetime.now()
+    #fotos.insert_one({'foto': 'teste'})
     return render_template("index.html")
 
 def detectar_faces(contador):
-
+    
     #Variaveis Globais
-    global vs, saida, trava
+    global vs, saida, trava, teste
     #intanciando
     fd = Ipkiss(fps=0.1)
     total = 0
@@ -46,9 +56,17 @@ def detectar_faces(contador):
         if total > contador:
             #a função detectar retorna as coordenadas do(s) rosto(s)
             faces = fd.detectar(cinza)
-            for (x, y, largura, altura) in faces:
-                #cv2 utiliza as coordenas para fazer um retangulo, nesse caso vermelho de 2px
-                cv2.rectangle(frame, (x, y), (x + largura, y + altura), (0, 0, 255), 2)
+            if not faces == ():
+                for (x, y, largura, altura) in faces:
+                    #corta o rosto da pessoa detectada
+                    rosto = frame[y: y+altura, x: x+largura]
+                    rosto = cv2.cvtColor(rosto, cv2.COLOR_BGR2RGB)
+                    if teste:
+                        dao.insert_fotos(rosto)
+                        #print('ok')
+                        teste = False
+                    # cv2 utiliza as coordenas para fazer um retangulo, nesse caso vermelho de 2px
+                    cv2.rectangle(frame, (x, y), (x + largura, y + altura), (0, 0, 255), 2)
         #detectando ou não, a imagem é atualizada
         fd.atualizar(cinza)
         total += 1
@@ -76,6 +94,7 @@ def gerar():
 def video_raiz():
     #quando iniciado, video raiz chama a funcão gerar
     return Response(gerar(), mimetype = "multipart/x-mixed-replace; boundary=frame")
+
 
 if __name__ == '__main__':
     # construa the argument parser and parse command line arguments

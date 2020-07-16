@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ipkiss</title>
+      <title>Ipkiss</title>
+      <link rel="icon" href="../static/mask_icon_140145.ico">
+      <link rel="stylesheet" href="../static/materialize/css/materialize.min.css"/>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
   <body>
-    <h1>Ipkiss versão alfa</h1>
-    <img src="{{ url_for('video_raiz') }}">
+    <nav class="nav-wrapper light-green">
+        <a href="#" class="brand-logo">Ipkiss</a>
+    </nav>
+    <div class="container">
+        <div>
+            <h3 class="center-align">Ipkiss</h3>
+        </div>
+        <br/>
+        <div>
+            <img class="responsive-img" src="{{ url_for('video_raiz') }}" alt="Imagens capturadas pela câmera">
+        </div>
+    </div>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
   </body>
+  <footer class="page-footer red">
+      <div class="footer-copyright">
+          <div class="container center">
+              ©Todos os Direitos Autorais são de propriedade da instituição de ensino IFSP - 2020
+          </div>
+    </div>
+  </footer>
 </html>
