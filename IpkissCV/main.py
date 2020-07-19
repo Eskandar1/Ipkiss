@@ -1,34 +1,28 @@
 # python main.py --ip 0.0.0.0 --port 8000
-from flask_pymongo import pymongo
+from flask_pymongo import PyMongo
 from models.ipkiss import Ipkiss
 from imutils.video import VideoStream
-from flask import Response, render_template, Flask
-#from flask import Flask
-#from flask import render_template
+from flask import Response, render_template, Flask, jsonify
 import threading
 import argparse
 import dao
 import imutils
 import time
 import cv2
-#import base64
 
-CONNECTION_STRING = "mongodb+srv://admin:123@ipkiss.bcenh.gcp.mongodb.net/data?retryWrites=true&w=majority"
-#a saída e uma trava usada para garantir a segurança de threads
-# trocas dos quadros na saída
 
-client = pymongo.MongoClient(CONNECTION_STRING)
-db = client.get_database('cv')
-fotos = pymongo.collection.Collection(db,'fotos')
 teste = False
 
 saida = None
 
 trava = threading.Lock()
 app = Flask(__name__)
+app.config['MONGO_DBNAME'] = 'cv'
+app.config['MONGO_URI'] = "mongodb+srv://admin:123@ipkiss.bcenh.gcp.mongodb.net/cv?retryWrites=true&w=majority"
+mongo = PyMongo(app)
 
 #Aqui Video Stream
-vs = VideoStream(src='http://192.168.0.117:8080/video').start()
+vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
 @app.route("/")
@@ -37,6 +31,21 @@ def index():
     #datahora = datetime.now()
     #fotos.insert_one({'foto': 'teste'})
     return render_template("index.html")
+
+@app.route('/horas')
+def horas():
+    x, y = dao.grafico_horas()
+    return jsonify({'type': x, 'results': y})
+
+@app.route('/dias')
+def dias():
+    x, y = dao.grafico_dias()
+    return jsonify({'type': x, 'results': y})
+
+@app.route('/meses')
+def meses():
+    x, y = dao.grafico_meses()
+    return jsonify({'type': x, 'results': y})
 
 def detectar_faces(contador):
     
