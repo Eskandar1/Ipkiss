@@ -1,0 +1,46 @@
+/*.stream{
+  display: inline;
+  position: block;
+}*/
+/*
+.ciclo{
+  position: relative;
+  display: block;
+  margin-top: -15px;
+  margin-left: 450px;
+  margin-bottom: 20px;
+  /*position: absolute;
+  right: 400px;
+  top: 100px;
+}*/
+.foto{
+  display: none;
+  border: 1px  #f44336 solid;
+  padding: 5px 200px 5px 5px;
+  margin-bottom: 0px;
+  box-shadow: 2px 5px #f44336;
+  border-radius: 10px;
+
+}
+.foto:first-of-type{
+   margin-top: 0px;
+}
+.imagem{
+  display: flex;
+}
+.hora{
+  display: flex;
+  padding-top: 40px;
+  padding-left: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+}
+.logo{
+  width: 120px;
+  height: 65px;
+}
+.img{
+  width: 450px;
+  height: 370px;
+}

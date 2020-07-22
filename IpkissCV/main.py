@@ -5,13 +5,13 @@ from imutils.video import VideoStream
 from flask import Response, render_template, Flask, jsonify
 import threading
 import argparse
-import dao
+from dao import DAO
 import imutils
 import time
 import cv2
 
 
-teste = False
+teste = True
 
 saida = None
 
@@ -20,7 +20,9 @@ app = Flask(__name__)
 app.config['MONGO_DBNAME'] = 'cv'
 app.config['MONGO_URI'] = "mongodb+srv://admin:123@ipkiss.bcenh.gcp.mongodb.net/cv?retryWrites=true&w=majority"
 mongo = PyMongo(app)
+dao = DAO(mongo)
 
+carr = []
 #Aqui Video Stream
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
@@ -47,10 +49,14 @@ def meses():
     x, y = dao.grafico_meses()
     return jsonify({'type': x, 'results': y})
 
+@app.route('/sobre')
+def sobre():
+    return render_template('sobre.html')
+
 def detectar_faces(contador):
     
     #Variaveis Globais
-    global vs, saida, trava, teste
+    global vs, saida, trava, teste, carr
     #intanciando
     fd = Ipkiss(fps=0.1)
     total = 0
@@ -70,10 +76,15 @@ def detectar_faces(contador):
                     #corta o rosto da pessoa detectada
                     rosto = frame[y: y+altura, x: x+largura]
                     rosto = cv2.cvtColor(rosto, cv2.COLOR_BGR2RGB)
+                    rosto = imutils.resize(rosto, 100, 100)
                     if teste:
-                        dao.insert_fotos(rosto)
-                        #print('ok')
-                        teste = False
+                        img64 = dao.insert_fotos(rosto)
+                        if len(carr) < 3:
+                            carr.append(img64)
+                        else:
+                            #teste = False
+                            carr.pop(0)
+                            carr.append(img64)
                     # cv2 utiliza as coordenas para fazer um retangulo, nesse caso vermelho de 2px
                     cv2.rectangle(frame, (x, y), (x + largura, y + altura), (0, 0, 255), 2)
         #detectando ou não, a imagem é atualizada
@@ -81,7 +92,7 @@ def detectar_faces(contador):
         total += 1
         with trava:
             saida = frame.copy()
-
+        time.sleep(0.5)
 def gerar():
     #Variavel global
     global saida, trava
@@ -104,7 +115,9 @@ def video_raiz():
     #quando iniciado, video raiz chama a funcão gerar
     return Response(gerar(), mimetype = "multipart/x-mixed-replace; boundary=frame")
 
-
+@app.route('/carrosel')
+def carrosel():
+    return jsonify({'fotos': carr})
 if __name__ == '__main__':
     # construa the argument parser and parse command line arguments
     ap = argparse.ArgumentParser()
