@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="561baf97-a9a6-4f0d-ab43-e784b2a04320" name="Default Changelist" comment="" />
+    <list default="true" id="561baf97-a9a6-4f0d-ab43-e784b2a04320" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/IpkissCV/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/IpkissCV/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IpkissCV/static/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/IpkissCV/static/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IpkissCV/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/IpkissCV/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IpkissCV/templates/sobre.html" beforeDir="false" afterPath="$PROJECT_DIR$/IpkissCV/templates/sobre.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,14 +51,18 @@
       <option name="presentableId" value="Default" />
       <updated>1594233534632</updated>
       <workItem from="1594233559260" duration="668000" />
+      <workItem from="1595527217208" duration="55000" />
     </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1594234260276">
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1595527269785">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1594234260276" />
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1595527269785" />
     <state x="184" y="7" key="SettingsEditor" timestamp="1594234216296">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

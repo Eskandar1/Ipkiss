@@ -17,16 +17,25 @@
           }
       </style>
   </head>
-  <body id="corpo">
-    <nav class="nav-wrapper light-green">
-        <a href="#" class="brand-logo"><img src="../static/logo.png" alt="logo IFSP" class="logo"></a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
-        </ul>
+  <header>
+    <nav class="nav-extended verde0">
+        <div class="nav-wrapper container logo">
+          <a href="#" class="brand-logo"><img src="../static/logo_ifsp_PRT.png" alt="Logo IFSP"></a>
+        </div>
+        <div class="nav-content verde1">
+            <div class="container">
+                <ul class="tabs tabs-transparent">
+                <li class="tab right"><a class="active" href="{{ url_for('sobre') }}">Sobre</a></li>
+                <li class="tab right disabled"><a  href="#">Stream</a></li>
+              </ul>
+            </div>
+        </div>
     </nav>
+  </header>
+  <body id="corpo">
     <div class="container">
         <div>
-            <h3 class="center-align">Ipkiss</h3>
+            <h3 class="center-align">Ipkiss: Inteligência Artificial para monitoramento do uso de máscaras de proteção</h3>
         </div>
         <br/>
         <div class="row">
@@ -37,17 +46,16 @@
             </div>
              <div class="col s12 m6">
                  <div class="ciclo">
-                    <figure style="opacity : 0.7"  id="ft0" class="foto">
-                        <img class="imagem" src="" id="im0" alt="imagem0">
+                     <figure  id="ft2" class="foto">
+                        <img class="imagem" src="" id="im2" alt="imagem2">
                         <figcaption class="hora"></figcaption>
                     </figure>
-                    <figure  id="ft1" class="foto">
+                    <figure  id="ft1" style="opacity : 0.9" class="foto">
                         <img class="imagem" src="" id="im1" alt="imagem1">
                         <figcaption class="hora"></figcaption>
                     </figure>
-                     <!-- style="display : none"-->
-                    <figure style="opacity : 0.7;" id="ft2" class="foto">
-                        <img class="imagem" src="" id="im2" alt="imagem2">
+                    <figure style="opacity : 0.7"  id="ft0" class="foto">
+                        <img class="imagem" src="" id="im0" alt="imagem0">
                         <figcaption class="hora"></figcaption>
                     </figure>
                 </div>
@@ -59,29 +67,31 @@
             </div>
             <div id="botoes_troca">
                 <button id="horas" class="btn-small disabled" onclick="botoes(0, this)">Horas</button>
-                <button id="dias" class="waves-effect waves-light btn-small light-green lighten-1" onclick="botoes(1, this)">Dias</button>
-                <button id="meses" class="waves-effect waves-light btn-small light-green lighten-1" onclick="botoes(2, this)">Meses</button>
+                <button id="dias" class="waves-effect waves-light btn-small green darken-4" onclick="botoes(1, this)">Dias</button>
+                <button id="meses" class="waves-effect waves-light btn-small green darken-4" onclick="botoes(2, this)">Meses</button>
             </div>
         </div>
         <div class="ct-chart ct-perfect-fourth"></div>
     </div>
   </body>
-  <footer class="page-footer red">
+  <footer class="page-footer verde1">
       <div class="container">
           <div class="row">
               <div class="col l6 s12">
-                  <h5 class="white-text">Colaborares</h5>
-                  <p class="grey-text text-lighten-4">Fábio Teixeira(Orientador)</p>
-                  <p class="grey-text text-lighten-4">Thiago Donadon Homem(Coorientador)</p>
+                  <h5 class="white-text">Criado por:</h5>
+                  <p class="grey-text text-lighten-4">Alexandre Pereira Junior (Aluno)</p>
+                  <p class="grey-text text-lighten-4">Fábio Teixeira (Orientador)</p>
+                  <p class="grey-text text-lighten-4">Thiago Donadon Homem (Coorientador)</p>
               </div>
               <div class="col l6 s12">
                   <h5 class="white-text">Emails</h5>
-                  <p class="grey-text text-lighten-4">fabioteixeira@prof.ifsp.edu.br</p>
+                  <p class="grey-text text-lighten-4">a.junior@aluno.ifsp.edu.br</p>
+                  <p class="grey-text text-lighten-4">fabio.teixeira@ifsp.edu.br</p>
                   <p class="grey-text text-lighten-4">thiagohomem@ifsp.edu.br</p>
               </div>
           </div>
       </div>
-      <div class="footer-copyright">
+      <div class="footer-copyright verde2">
           <div class="container center">
               ©Todos os Direitos Autorais são de propriedade da instituição de ensino IFSP - 2020
           </div>
@@ -161,7 +171,7 @@
     }
     function botoes(tipo, botao){
         let desativado = $('.disabled');
-        desativado.removeClass().addClass('waves-effect waves-light btn-small light-green lighten-1');
+        desativado.removeClass().addClass('waves-effect waves-light btn-small green darken-4');
         let bt = $(botao);
         bt.removeClass().addClass('btn-small disabled');
         var dado;

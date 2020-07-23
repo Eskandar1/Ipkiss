@@ -37,10 +37,20 @@
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 .logo{
-  width: 120px;
-  height: 65px;
+  padding-top: 10px;
+  padding-bottom: 100px;
 }
 .img{
   width: 450px;
   height: 370px;
+}
+.verde2{
+    background-color: #002907 !important;
+}
+.verde1{
+    background-color: #00420c;
+}
+
+.verde0{
+    background-color: #195128;
 }

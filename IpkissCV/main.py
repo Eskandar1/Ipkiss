@@ -2,6 +2,7 @@
 from flask_pymongo import PyMongo
 from models.ipkiss import Ipkiss
 from imutils.video import VideoStream
+from datetime import datetime
 from flask import Response, render_template, Flask, jsonify
 import threading
 import argparse
@@ -67,6 +68,10 @@ def detectar_faces(contador):
         frame = imutils.resize(frame, width=400)
         #cinza recebe uma cópia em escala de cinza da imagem
         cinza = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        timestamp = datetime.now()
+        cv2.putText(frame, timestamp.strftime(
+            "%d/%m/%Y %H:%M:%S"), (10, frame.shape[0] - 10),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 255, 0), 1)
 
         if total > contador:
             #a função detectar retorna as coordenadas do(s) rosto(s)
@@ -92,7 +97,7 @@ def detectar_faces(contador):
         total += 1
         with trava:
             saida = frame.copy()
-        time.sleep(0.5)
+        time.sleep(1)
 def gerar():
     #Variavel global
     global saida, trava
